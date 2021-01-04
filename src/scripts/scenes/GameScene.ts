@@ -1,18 +1,24 @@
+import Player from './../prefabs/Player';
 export default class GameScene extends Phaser.Scene {
 
+  private player: Player;
+  public cursors: Phaser.Types.Input.Keyboard.CursorKeys;
 
-    constructor() {
-        super('Game');
-    }
+  constructor() {
+      super('Game');
+  }
 
-    public create (): void {
-      this.createBackground();
+  public create(): void {
+    this.createBackground();
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.player = new Player(this);
+  }
 
-      this.add.sprite(150, Number(this.sys.game.config.height) / 2, 'dragon', 'dragon1' )
-    }
+  public update(): void {
+    this.player.move();
+  }
 
-    private createBackground(): void {
-      this.add.sprite(0, 0, 'bg').setOrigin(0);
-    }
-
+  private createBackground(): void {
+    this.add.sprite(0, 0, 'bg').setOrigin(0);
+  }
 }
