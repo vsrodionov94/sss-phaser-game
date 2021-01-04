@@ -1,19 +1,17 @@
 import GameScene from './../scenes/GameScene';
+import Enemy from './Enemy';
 
-export default class Player extends Phaser.Physics.Arcade.Sprite {
+export default class Player extends Enemy {
   public body: Phaser.Physics.Arcade.Body;
   public scene: GameScene;
   public velocity: number;
 
-  constructor(scene) {
+  constructor(scene: Phaser.Scene) {
     super(scene, 150, 500, 'dragon', 'dragon1');
-    this.init();
   }
 
-  private init(): void {
-    this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
-    this.body.enable = true;
+  public init(): void {
+    super.init();
     this.velocity = 500;
   }
 
