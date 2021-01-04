@@ -3,22 +3,26 @@ export default class GameScene extends Phaser.Scene {
 
   private player: Player;
   public cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-
+  public bg: Phaser.GameObjects.TileSprite;
   constructor() {
       super('Game');
   }
 
+  public init(): void {
+    this.cursors = this.input.keyboard.createCursorKeys();
+  }
+
   public create(): void {
     this.createBackground();
-    this.cursors = this.input.keyboard.createCursorKeys();
     this.player = new Player(this);
   }
 
   public update(): void {
     this.player.move();
+    this.bg.tilePositionX += 0.5;
   }
 
   private createBackground(): void {
-    this.add.sprite(0, 0, 'bg').setOrigin(0);
+    this.bg = this.add.tileSprite(0, 0, Number(this.sys.game.config.width), Number(this.sys.game.config.height),'bg').setOrigin(0);
   }
 }
