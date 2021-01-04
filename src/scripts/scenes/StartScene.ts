@@ -1,8 +1,5 @@
 export default class StartScene extends Phaser.Scene {
 
-  private title: Phaser.GameObjects.Text;
-  private text: Phaser.GameObjects.Text;
-
   constructor() {
     super('Start');
   }
@@ -12,6 +9,10 @@ export default class StartScene extends Phaser.Scene {
   }
 
   public create(): void {
-    this.add
+    this.createBackground();
+  }
+
+  private createBackground(): void {
+    this.add.sprite(0, 0, 'bg').setOrigin(0);
   }
 }
