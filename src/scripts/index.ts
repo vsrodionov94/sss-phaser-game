@@ -8,7 +8,7 @@ const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: 1280,
     height: 720,
-    scene: [StartScene, BootScene, PreloadScene, GameScene],
+    scene: [BootScene, PreloadScene, StartScene, GameScene],
 };
 
 export default new Phaser.Game(config);
