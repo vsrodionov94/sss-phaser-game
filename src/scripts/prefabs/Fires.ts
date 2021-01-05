@@ -2,10 +2,8 @@ import Fire from './Fire';
 
 export default class Fires extends Phaser.Physics.Arcade.Group {
 
-
   constructor(scene: Phaser.Scene){
     super(scene.physics.world, scene);
-
   }
 
   public createFire(source: Phaser.Physics.Arcade.Sprite): void {

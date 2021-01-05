@@ -2,20 +2,18 @@ import MovableObjects from './MovableObject';
 
 export default class Fire extends MovableObjects {
 
-  public velocity: number;
-
   constructor(data) {
     super(data);
     this.init(data);
   }
 
-  static generate(scene: Phaser.Scene, source:Phaser.Physics.Arcade.Sprite): Fire {
+  static generate(scene: Phaser.Scene, source): Fire {
     const data = {
       scene,
-      x: source.x + source.width / 2,
+      x: source.x,
       y: source.y,
-      texture: 'fire',
-      velocity: 750
+      texture: source.bullet.texture,
+      velocity: source.bullet.velocity,
     }
     return new Fire(data);
   }

@@ -2,6 +2,11 @@ export default class MovableObjects extends Phaser.Physics.Arcade.Sprite {
 
   public body: Phaser.Physics.Arcade.Body;
   public velocity: number;
+  public bullet: {
+    delay: number,
+    velocity: number,
+    texture: string
+  }
 
   constructor(data: {
     scene: Phaser.Scene,
@@ -9,8 +14,13 @@ export default class MovableObjects extends Phaser.Physics.Arcade.Sprite {
     y: number,
     texture: string,
     frame?: string,
-    velocity?: number,
-
+    velocity,
+    bullet?: {
+      delay: number,
+      velocity: number,
+      texture: string
+    },
+    origin?: {x: number, y: number}
   }) {
     super(data.scene, data.x, data.y, data.texture, data.frame);
     this.init(data);
