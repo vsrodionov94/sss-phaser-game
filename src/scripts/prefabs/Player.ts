@@ -7,7 +7,7 @@ export default class Player extends Enemy {
   public velocity: number;
 
   constructor(scene: Phaser.Scene) {
-    super(scene, 150, 500, 'dragon', 'dragon1');
+    super(scene, 250, Number(scene.game.config.height) / 2, 'dragon', 'dragon1');
   }
 
   public init(): void {

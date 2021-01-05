@@ -10,6 +10,12 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.init();
   }
 
+  static generate(scene: Phaser.Scene) {
+    const x: number = Number(scene.game.config.width) + 200;
+    const y: number =  Phaser.Math.Between(100, Number(scene.game.config.height) - 100) ;
+    const id: number = Phaser.Math.Between(1, 4);
+    return new Enemy(scene, x, y, 'enemy', `enemy${id}`);
+  }
   public init(): void {
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
