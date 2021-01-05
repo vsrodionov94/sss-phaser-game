@@ -19,7 +19,7 @@ export default class GameScene extends Phaser.Scene {
   public create(): void {
     this.createBackground();
     this.player = new Player(this);
-    this.enemies = new Enemies(this.physics.world, this);
+    this.enemies = new Enemies(this);
   }
 
   public update(): void {
