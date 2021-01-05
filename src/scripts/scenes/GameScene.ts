@@ -30,4 +30,5 @@ export default class GameScene extends Phaser.Scene {
   private createBackground(): void {
     this.bg = this.add.tileSprite(0, 0, Number(this.sys.game.config.width), Number(this.sys.game.config.height),'bg').setOrigin(0);
   }
+
 }

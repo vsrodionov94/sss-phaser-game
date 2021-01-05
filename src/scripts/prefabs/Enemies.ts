@@ -1,11 +1,15 @@
 import Enemy from './Enemy';
+
 export default class Enemies extends Phaser.Physics.Arcade.Group {
+
   public timer: Phaser.Time.TimerEvent;
-  public count: number;
+  public countMax: number;
+  public countCreative: number;
   constructor(world: Phaser.Physics.Arcade.World, scene: Phaser.Scene){
     super(world, scene);
     this.scene = scene;
-    this.count = 10;
+    this.countMax = 10;
+    this.countCreative = 0;
     this.timer = this.scene.time.addEvent({
       delay: 1000,
       loop: true,
@@ -15,19 +19,25 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   }
 
   private tick(): void {
-    if (this.getLength() < this.count) {
+    if (this.countCreative < this.countMax) {
       this.createEnemy();
     } else {
       this.timer.remove();
     }
-
   }
 
   public createEnemy(): void {
-    let enemy = Enemy.generate(this.scene);
-    this.add(enemy);
-    enemy.move();
-  }
+    let enemy = this.getFirstDead();
 
+    if (!enemy) {
+      enemy = Enemy.generate(this.scene);
+      this.add(enemy);
+    } else {
+      enemy.reset();
+    }
+
+    enemy.move();
+    ++this.countCreative;
+  }
 
 }
