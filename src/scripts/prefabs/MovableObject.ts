@@ -55,7 +55,7 @@ export default class MovableObjects extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  public setAlive(state): void {
+  public setAlive(state:boolean): void {
     this.body.enable = state;
     this.setVisible(state);
     this.setActive(state);
@@ -63,6 +63,10 @@ export default class MovableObjects extends Phaser.Physics.Arcade.Sprite {
     if (this.timer) {
         this.timer.paused = !state;
     }
+    if (!status){
+      this.emit('killed');
+    }
+
   }
 
   public move():void {

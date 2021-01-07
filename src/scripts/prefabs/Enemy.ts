@@ -13,7 +13,7 @@ export default class Enemy extends MovableObjects {
     return {x, y, frame: `enemy${id}`};
   }
 
-  static generate(scene: Phaser.Scene, fires) {
+  static generate(scene: Phaser.Scene, fires: Fires) {
 
     const data = Enemy.generateAttributes(scene);
 
