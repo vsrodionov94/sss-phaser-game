@@ -13,12 +13,13 @@ export default class Enemy extends MovableObjects {
     return {x, y, frame: `enemy${id}`};
   }
 
-  static generate(scene: Phaser.Scene) {
+  static generate(scene: Phaser.Scene, fires) {
 
     const data = Enemy.generateAttributes(scene);
 
     return new Enemy({
       scene,
+      fires,
       x: data.x,
       y: data. y,
       texture: 'enemy',
@@ -35,6 +36,7 @@ export default class Enemy extends MovableObjects {
 
   public init(data: {
     scene: Phaser.Scene,
+    fires: Fires,
     x: number,
     y: number,
     texture: string,
@@ -45,7 +47,7 @@ export default class Enemy extends MovableObjects {
   }): void {
     super.init(data);
     this.setOrigin(data.origin.x, data.origin.y);
-    this.fires = new Fires(this.scene);
+    this.fires = data.fires || new Fires(this.scene);
 
     this.timer = this.scene.time.addEvent({
       delay: data.bullet.delay,

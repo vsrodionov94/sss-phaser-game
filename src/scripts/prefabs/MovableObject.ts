@@ -1,7 +1,11 @@
+import Fires from './Fires';
+
 export default class MovableObjects extends Phaser.Physics.Arcade.Sprite {
+
 
   public body: Phaser.Physics.Arcade.Body;
   public velocity: number;
+  public timer: Phaser.Time.TimerEvent;
   public bullet: {
     delay: number,
     velocity: number,
@@ -10,6 +14,7 @@ export default class MovableObjects extends Phaser.Physics.Arcade.Sprite {
 
   constructor(data: {
     scene: Phaser.Scene,
+    fires?: Fires,
     x: number,
     y: number,
     texture: string,
@@ -54,6 +59,10 @@ export default class MovableObjects extends Phaser.Physics.Arcade.Sprite {
     this.body.enable = state;
     this.setVisible(state);
     this.setActive(state);
+
+    if (this.timer) {
+        this.timer.paused = !state;
+    }
   }
 
   public move():void {

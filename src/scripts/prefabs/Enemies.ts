@@ -1,13 +1,16 @@
 import Enemy from './Enemy';
+import Fires from './Fires';
 
 export default class Enemies extends Phaser.Physics.Arcade.Group {
 
   public timer: Phaser.Time.TimerEvent;
   public countMax: number;
   public countCreative: number;
+  public fires: Fires;
   constructor(scene: Phaser.Scene){
     super(scene.physics.world, scene);
     this.scene = scene;
+    this.fires = new Fires(this.scene);
     this.countMax = 10;
     this.countCreative = 0;
     this.timer = this.scene.time.addEvent({
@@ -30,7 +33,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     let enemy = this.getFirstDead();
 
     if (!enemy) {
-      enemy = Enemy.generate(this.scene);
+      enemy = Enemy.generate(this.scene, this.fires);
       this.add(enemy);
     } else {
       enemy.reset();
