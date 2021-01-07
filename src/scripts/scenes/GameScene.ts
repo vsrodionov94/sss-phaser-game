@@ -1,6 +1,7 @@
 import Player from './../prefabs/Player';
 import Enemies from './../prefabs/Enemies';
 import MovableObjects from './../prefabs/MovableObject';
+import Boom from './../prefabs/Boom';
 
 export default class GameScene extends Phaser.Scene {
 
@@ -41,10 +42,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   public onOverlap(source: MovableObjects, target: MovableObjects):void {
-    if (source !== this.player && target !== this.player) {
+    const enemy = [source, target].find(item => item.texture.key === 'enemy');
+
+    if (enemy) {
       ++this.score;
       this.scoreText.setText(`Score ${this.score}`);
+      Boom.generate(this, target.x, target.y);
     }
+
     source.setAlive(false);
     target.setAlive(false);
 

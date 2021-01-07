@@ -33,7 +33,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
 
   public onEnemyKilled(): void {
     ++this.countKilled;
-
+    console.log(this.countKilled)
     if (this.countKilled >= this.countMax) {
       this.scene.events.emit('enemies-killed');
     };
