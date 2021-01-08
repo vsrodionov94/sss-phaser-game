@@ -58,7 +58,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.enemies, this.player, this.onOverlap, undefined, this);
   }
 
-  public onOverlap(source: MovableObjects, target: MovableObjects):void {
+  public onOverlap(source: MovableObjects, target: MovableObjects): void {
     const enemy = [source, target].find(item => item.texture.key === 'enemy');
 
     if (enemy) {

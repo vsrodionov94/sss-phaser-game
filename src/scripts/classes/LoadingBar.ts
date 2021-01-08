@@ -42,13 +42,12 @@ export default class LoadingBar {
   }
 
   public onFileProgress(file): void {
-    console.log(file);
+
   }
 
   public onLoadComplete(): void {
     this.progressBar.destroy();
     this.progressBox.destroy();
-    console.log('Preloading complete');
   }
 
 }

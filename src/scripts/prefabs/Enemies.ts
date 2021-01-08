@@ -14,7 +14,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     this.fires = new Fires(this.scene);
     this.countMax = 10;
     this.countCreative = 0;
-    this.countKilled = 0;
+    this.countKilled = -7;
     this.timer = this.scene.time.addEvent({
       delay: 1000,
       loop: true,
@@ -33,7 +33,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
 
   public onEnemyKilled(): void {
     ++this.countKilled;
-    console.log(this.countKilled)
+    console.log('count killed' + this.countKilled);
     if (this.countKilled >= this.countMax) {
       this.scene.events.emit('enemies-killed');
     };
