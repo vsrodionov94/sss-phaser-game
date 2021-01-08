@@ -11,6 +11,10 @@ export default class GameScene extends Phaser.Scene {
   public enemies: Enemies;
   public score: number;
   public scoreText: Phaser.GameObjects.Text;
+  public sounds: {
+    theme: Phaser.Sound.BaseSound,
+    boom: Phaser.Sound.BaseSound
+  }
   constructor() {
       super('Game');
   }
@@ -22,11 +26,15 @@ export default class GameScene extends Phaser.Scene {
 
   public create(): void {
     this.createBackground();
+    if (!this.sounds) {
+      this.createSound();
+    }
     this.player = new Player(this);
     this.enemies = new Enemies(this);
     this.createCompleteEvents();
     this.addOverlap();
     this.createText();
+
   }
 
   public createText(): void {
@@ -35,6 +43,15 @@ export default class GameScene extends Phaser.Scene {
       color: '#ffffff'
     });
   }
+
+  public createSound(): void {
+    this.sounds = {
+        theme: this.sound.add('theme', { volume: 0.1, loop: true }),
+        boom: this.sound.add('boom', { volume: 0.3 }),
+    };
+    this.sounds.theme.play();
+  }
+
   public addOverlap(): void {
     this.physics.add.overlap(this.player.fires, this.enemies, this.onOverlap, undefined, this);
     this.physics.add.overlap(this.enemies.fires, this.player, this.onOverlap, undefined, this);
@@ -48,6 +65,7 @@ export default class GameScene extends Phaser.Scene {
       ++this.score;
       this.scoreText.setText(`Score ${this.score}`);
       Boom.generate(this, target.x, target.y);
+      this.sounds.boom.play()
     }
 
     source.setAlive(false);
@@ -66,7 +84,6 @@ export default class GameScene extends Phaser.Scene {
       completed: this.player.active
     });
   }
-
 
   public update(): void {
     this.player.move();
